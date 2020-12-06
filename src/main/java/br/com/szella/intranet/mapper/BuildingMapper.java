@@ -8,7 +8,7 @@ import br.com.szella.intranet.requests.building.BuildingPostRequestBody;
 import br.com.szella.intranet.requests.building.BuildingPutRequestBody;
 
 @Mapper(componentModel = "spring")
-public abstract class BuildingMapper {
+public interface BuildingMapper {
 	public static final BuildingMapper INSTANCE = Mappers.getMapper(BuildingMapper.class);
 
 	public abstract Building toBuilding(BuildingPostRequestBody BuildingPostRequestBody);
