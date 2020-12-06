@@ -1,13 +1,16 @@
 package br.com.szella.intranet.domain;
 
-import java.util.UUID;
+import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,16 +24,24 @@ import lombok.ToString;
 @Table(name = "building")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = { "name" })
-public class Building {
+@Getter
+@Setter
+@Builder
+@EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
+@ToString(onlyExplicitlyIncluded = true)
+public class Building implements Serializable {
+	private static final long serialVersionUID = -3382225806470954978L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Getter
-	private UUID id;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@EqualsAndHashCode.Include
+	@ToString.Include
+	private String id;
 
-	@Getter
-	@Setter
-	@Size(min = 1, max = 100)
+	@NotBlank
+	@Size(min = 1, max = 255)
+	@Column(name = "name", nullable = false, unique = true)
+	@ToString.Include
 	private String name;
 }
