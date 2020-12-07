@@ -2,6 +2,8 @@ package br.com.szella.intranet.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,7 +44,7 @@ public class BuildingController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Building> save(@RequestBody BuildingPostRequestBody animePostRequestBody) {
+	public ResponseEntity<Building> save(@RequestBody @Valid BuildingPostRequestBody animePostRequestBody) {
 		return new ResponseEntity<>(buildingService.save(animePostRequestBody), HttpStatus.CREATED);
 	}
 
@@ -53,7 +55,7 @@ public class BuildingController {
 	}
 
 	@PutMapping
-	public ResponseEntity<Void> replace(@RequestBody BuildingPutRequestBody animePutRequestBody) {
+	public ResponseEntity<Void> replace(@RequestBody @Valid BuildingPutRequestBody animePutRequestBody) {
 		buildingService.replace(animePutRequestBody);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

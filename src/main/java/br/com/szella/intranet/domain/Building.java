@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -39,8 +37,6 @@ public class Building implements Serializable {
 	@ToString.Include
 	private String id;
 
-	@NotBlank
-	@Size(min = 1, max = 255)
 	@Column(name = "name", nullable = false, unique = true)
 	@ToString.Include
 	private String name;
